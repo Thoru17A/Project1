@@ -25,4 +25,4 @@ fn main() {
     println!("Площадь сектора окружности: {}", sector_area(radius, angle));
 }
 
-// комментарий 
+
