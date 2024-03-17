@@ -16,6 +16,7 @@ fn sector_area(radius: f64, angle: f64) -> f64 {
     (angle / 360.0) * PI * f64::powf(radius, 2.0)
 }
 
+
 fn trapezoid_perimeter(base1: f64, base2: f64, side1: f64, side2: f64) -> f64 {
     base1 + base2 + side1 + side2
 }
