@@ -46,3 +46,4 @@ fn main() {
         println!("Площадь сектора окружности: {}", sector_area);
     }
 }
+//hy
