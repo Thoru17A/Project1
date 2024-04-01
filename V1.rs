@@ -17,16 +17,32 @@ fn sector_area(radius: f64, angle: f64) -> f64 {
 }
 
 
-fn trapezoid_perimeter(base1: f64, base2: f64, side1: f64, side2: f64) -> f64 {
-    base1 + base2 + side1 + side2
+fn trapezoid_perimeter(base1: f64, base2: f64, side1: f64, side2: f64) -> Option <f64> {
+    if base1 <= 0.0 || base2 <= 0.0 || side1 <= 0.0 || side2 <= 0.0
+    {
+        eprintln!("Ошибка: значение сторон трапеции не может быть отрицательным");
+        return None;
+    }
+
+    Some(base1 + base2 + side1 + side2)
 }
 
-fn trapezoid_area(base1: f64, base2: f64, side1: f64, side2: f64) -> f64 {
-    (base1 + base2) / 2.0 * (f64::powf(side1, 2.0) - f64::powf((f64::powf(base1 - base2, 2.0) + f64::powf(side1, 2.0) - f64::powf(side2, 2.0)) / (2.0 * (base1 - base2)), 2.0)).sqrt()
+fn trapezoid_area(base1: f64, base2: f64, side1: f64, side2: f64) ->Option <f64> {
+    if base1 <= 0.0 || base2 <= 0.0 || side1 <= 0.0 || side2 <= 0.0
+    {
+        eprintln!("Ошибка: значение сторон трапеции не может быть отрицательным");
+        return None;
+    }
+    Some((base1 + base2) / 2.0 * (f64::powf(side1, 2.0) - f64::powf((f64::powf(base1 - base2, 2.0) + f64::powf(side1, 2.0) - f64::powf(side2, 2.0)) / (2.0 * (base1 - base2)), 2.0)).sqrt())
 }
 
-fn trapezoid_middleline(base1: f64, base2: f64) -> f64 {
-    (base1 + base2) / 2.0
+fn trapezoid_middleline(base1: f64, base2: f64) -> Option <f64> {
+    if base1 <= 0.0 || base2 <= 0.0
+    {
+        eprintln!("Ошибка: значение сторон трапеции не может быть отрицательным");
+        return None;
+    }
+    Some((base1 + base2) / 2.0)
 }
 
 fn main() {
@@ -41,7 +57,16 @@ fn main() {
     let base2: f64 = 13.0;
     let side1: f64 = 7.0;
     let side2: f64 = 8.0;
-    println!("Периметр трапеции: {}", trapezoid_perimeter(base1, base2, side1, side2));
-    println!("Площадь трапеции: {}", trapezoid_area(base1, base2, side1, side2));
-    println!("Средняя линия трапеции: {}", trapezoid_middleline(base1, base2));
+    if let Some(trap_perimeter) = trapezoid_perimeter(base1, base2, side1, side2)
+    {
+        println!("Периметр трапеции: {}", trap_perimeter);
+    }
+    if let Some(trap_area) = trapezoid_area(base1, base2, side1, side2)
+    {
+        println!("Площадь трапеции: {}", trap_area);
+    }
+    if let Some(trap_midline) = trapezoid_middleline(base1, base2)
+    {
+        println!("Средняя линия трапеции: {}", trap_midline);
+    }
 }
